@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+<title>Conductor</title>
+<link href="favicon.ico" rel="icon" type="image/x-icon">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="lib/messenger/css/messenger.css">
+<link rel="stylesheet" href="lib/messenger/css/messenger-theme-flat.css">
+<link rel="stylesheet" href="lib/shepherd-0.5.1/css/shepherd-theme-arrows.css">
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="bower_components/selectize/dist/css/selectize.css">
+<link rel="stylesheet" href="bower_components/selectize/dist/css/selectize.bootstrap3.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="editor-mode">
+<script>window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;</script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/threejs/build/three.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/hogan/web/1.0.0/hogan.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/backbone/backbone.js"></script>
+<script src="bower_components/selectize/dist/js/standalone/selectize.js"></script>
+<script src="lib/OBJLoader.js"></script>
+<script src="lib/messenger/js/messenger.js"></script>
+<script src="lib/shepherd-0.5.1/shepherd.js"></script>
+<script src="lib/stats.min.js"></script>
+<script src="lib/avoid.js/avoid.bin.js"></script>
+<script src="lib/avoid.js/avoid.js"></script>
+<script src="lib/toposort.js"></script>
+<script src="lib/jquery-ui-1.10.4.min.js"></script>
+<script src="physijs/physi.js"></script>
+<script>
+var stats = new Stats();
+stats.setMode(0);
+$(stats.domElement).appendTo("body")
+</script>
+<script src="lib/require.js" data-main="boot.js"></script>
+<div id="toolbar">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-3 tour-nav">
+				<ol class="breadcrumb" style="margin:0" id="network-nav">
+					<li>Network</li>
+				</ol>
+			</div>
+			<div class="col-xs-9">
+				<div class="btn-toolbar">
+					<div class="btn-group network-io pull-left">
+						<button type="button" class="btn btn-default btn-sm" data-function="save" data-toggle="modal" data-target="#saveModal"><span class="glyphicon glyphicon-log-out"></span>Save</button>
+						<button type="button" class="btn btn-default btn-sm" data-function="load"  data-toggle="modal" data-target="#loadModal"><span class="glyphicon glyphicon-log-in"></span>Load</button>
+					</div>
+					<div class="btn-group graph-toolbar pull-left">
+					<button type="button" class="tour-add btn btn-default dropdown-toggle btn-sm" data-function="add" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span>Add&nbsp;<span class="caret"></span></button>
+						<ul class="dropdown-menu add-node" role="menu">
+							<li><a href="#" data-item="entity">Entity</a></li>
+							<li><a href="#" data-item="condition">Condition</a></li>
+							<li class="ctx-handler"><a href="#" data-item="trigger">Trigger</a></li>
+							<li class="ctx-network"><a href="#" data-item="handler">Handler</a></li>
+						</ul>
+					</div>
+					<div class="btn-group graph-toolbar pull-left tour-edit">
+						<button type="button" class="btn btn-default disabled btn-sm" data-function="edit"><span class="glyphicon glyphicon-pencil"></span>Edit</button>
+						<button type="button" class="btn btn-default disabled btn-sm" data-function="delete"><span class="glyphicon glyphicon-trash"></span>Delete</button>
+					</div>
+					<div class="btn-group view-switch pull-left">
+						<button type="button" class="btn btn-default active btn-sm" data-switch="editor"><span class="glyphicon glyphicon-pencil"></span>Editor</button>
+						<button type="button" class="btn btn-default btn-sm" data-switch="preview"><span class="glyphicon glyphicon-eye-open"></span>Preview</button>
+					</div>
+					<div class="pull-left">
+						<button type="button" class="btn btn-default tour-button btn-sm"><span class="glyphicon glyphicon-question-sign"></span>Help</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div id="renderer_osd">
+<div class="top">
+	<input>
+</div>
+<div class="bottom">
+	<input>
+</div>
+</div>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title">Add Node</h4>
+		</div>
+		<div class="modal-body">
+		</div>
+		<div class="modal-footer">
+			<button type="button" id="save_add" class="btn btn-primary" data-dismiss="modal">Save</button>
+		</div>
+	</div>
+</div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title">Edit Node</h4>
+		</div>
+		<div class="modal-body">
+		</div>
+		<div class="modal-footer">
+			<button type="button" id="save_edit" class="btn btn-primary" data-dismiss="modal">Save</button>
+		</div>
+	</div>
+</div>
+</div>
+<div class="modal fade" id="saveModal" tabindex="-1" role="dialog">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title">Save Network</h4>
+		</div>
+		<div class="modal-body">
+			<textarea id="graph_json"></textarea>
+		</div>
+	</div>
+</div>
+</div>
+<div class="modal fade" id="loadModal" tabindex="-1" role="dialog">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title">Load Network</h4>
+		</div>
+		<div class="modal-body">
+			<textarea id="extern_json"></textarea>
+		</div>
+		<div class="modal-footer">
+			<button type="button" id="load_graph" class="btn btn-primary" data-dismiss="modal">Load</button>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>
