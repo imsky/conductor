@@ -1,0 +1,57 @@
+body {margin:0;font-family:Helvetica, Arial, sans-serif;background:#7A8699;
+    background-image:       linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent);
+  background-size:50px 50px;
+overflow: hidden;}
+
+.preview-mode #editor {display:none;}
+.preview-mode #render_3d, .preview-mode #renderer_osd {display:block;}
+#renderer_osd, #render_3d {display:none}
+#renderer_osd {position:absolute;top:80px;bottom:40px;left:0px;right:0px;z-index:100;pointer-events:none}
+#renderer_osd div {position:absolute;top:0px;left:0px;width:100%;text-align:center;}
+#renderer_osd input {color:#fff;text-shadow:0px 1px 5px #000;font-weight:bold;font-size:1.2em;background:0;border:0;text-align:center;width:500px}
+#renderer_osd div.bottom {top:auto;bottom:0px}
+#render_3d {position:absolute;margin:auto;top:0;left:0;bottom:0;right:0;z-index:98}
+#render_3d.picker {cursor:pointer}
+
+#editor, #toolbar {-webkit-user-select:none}
+svg.unclickable {pointer-events:none}
+
+#editor {color:#222;position:absolute;left:0px;top:0px;width:100%;height:100%;overflow:auto}
+.nodes, .connections, .newConnection {position:absolute;top:80px}
+.nodes {z-index:20;width:100%}
+.connections {z-index:10;top:70px}
+.newConnection {z-index:30;top:70px}
+
+.nodes .node {border-radius:8px;width:200px;background:#fff;box-shadow:0px 1px 10px rgba(0,0,0,0.4);position:absolute;top:0px;left:0px;overflow:hidden}
+.nodes .node .title {padding:10px;font-weight:bold;color:rgba(0,0,0,0.5);cursor:pointer}
+.nodes .node.active {box-shadow:0px 2px 15px rgba(0,0,0,0.7)}
+.nodes .node.active .title {color:#000}
+.nodes .node .title.entity {background:#E6EBF2}
+.nodes .node .title.handler {background:#EBF2E6}
+.nodes .node .title.condition {background:#F2EBE6}
+.nodes .node .title.trigger {background:#EBF2E6}
+.nodes .node .section {padding:5px 0px;border-top:solid 1px #eee;user-select:none;-webkit-user-select:none;-moz-user-select:none}
+.nodes .node .section .header {font-size:0.7em;color:#777;text-transform:uppercase;letter-spacing:1px;padding:5px 10px;margin-bottom:5px}
+
+.nodes .node .button {border-radius:4px;text-align:center;margin:10px auto;width:100px;border:solid 1px #ddd;font-size:0.8em;padding:5px;cursor:pointer;background:#f9f9f9}
+
+.nodes .node .add-button:hover {border-color:#ccc}
+.nodes .node .section .list .item {font-size:0.9em;margin:5px 0px;padding-left:20px;position:relative}
+.nodes .node .section .list .data-in::before {content:"";border-radius:8px;width:8px;height:8px;position:absolute;top:5px;left:6px;border:solid 2px #7A8699}
+.nodes .node .section .list .data-out {padding-left:0px;padding-right:20px;text-align:right}
+.nodes .node .section .list .data-out::before {content:"";border-radius:8px;width:8px;height:8px;position:absolute;top:5px;right:6px;background:#7A8699}
+.nodes .node .section.variables .list .item {border-left-width:0px;padding-left:10px;font-family:monospace}
+
+.btn-group.pull-left {margin-right:20px}
+#network-nav {font-size:0.8em}
+
+#toolbar {border-bottom:solid 1px #ddd;position:fixed;top:0px;left:0px;right:0px;padding:10px 0px;background:#fff;z-index:100;}
+.modal textarea {width:100%;height:300px;font-size:12px;font-family:monospace}
+button .glyphicon {margin-right:8px}
+
+.graph-toolbar .ctx-network, .graph-toolbar .ctx-handler {display:none}
+body.ctx-network .graph-toolbar .ctx-network {display:block}
+body.ctx-handler .graph-toolbar .ctx-handler {display:block}
+
+#stats {z-index:99;position:absolute;top:70px;right:20px}
+.shepherd-step {z-index:100}
