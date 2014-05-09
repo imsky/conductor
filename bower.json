@@ -1,0 +1,22 @@
+{
+  "name": "conductor",
+  "authors": [
+    "Ivan Malopinsky <ivmalopi@indiana.edu>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.11.1",
+    "bootstrap": "~3.1.1",
+    "hogan": "~3.0.0",
+    "backbone": "~1.1.2",
+    "selectize": "~0.9.1"
+  }
+}
