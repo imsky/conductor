@@ -1,0 +1,15 @@
+{
+  "name": "conductor",
+  "version": "0.9.9",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "node node_modules/http-server/bin/http-server",
+    "zip": "git archive HEAD | gzip > conductor.tar.gz"
+  },
+  "author": "Ivan Malopinsky",
+  "license": "MIT",
+  "dependencies": {
+    "http-server": "^0.6.1"
+  }
+}
