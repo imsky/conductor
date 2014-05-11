@@ -1,0 +1,11 @@
+<form data-target="{{node.name}}" data-type="trigger">
+<div class="form-group">
+<label>Node name</label>
+<input class="form-control" id="graphNodeName" placeholder="e.g. door" value="{{node.name}}">
+</div>
+
+<div class="form-group">
+<label>Inputs</label>
+<input class="form-control taggable" id="nodeInputs" placeholder="e.g. state, position" value="{{node.config.inputs}}">
+</div>
+</form>

@@ -1,0 +1,19 @@
+<table class="table table-condensed logicTable">
+<thead>
+<tr>
+<th>Question</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+{{#values}}
+<tr><td>{{{question}}}</td><td><a href="#" data-function="delete">Delete</a></td></tr>
+{{/values}}
+</tbody>
+</table>
+<select class="select" id="logicOps">
+{{#ops}}
+<option>{{.}}</option>
+{{/ops}}
+</select>
+<button class="select" id="logicAdd">Add</button>

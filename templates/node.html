@@ -1,0 +1,124 @@
+<div>
+	<div class="title {{config.type}}" title="{{config.type}}">
+		{{name}}
+	</div>
+	
+	{{#isEntity}}
+	{{#config.variables.length}}
+	<div class="section variables">
+		<div class="header">
+			Variables
+		</div>
+		<div class="list">
+			{{#config.variables}}
+			<div class="item" data-name="{{.}}">
+				{{.}}
+			</div>
+			{{/config.variables}}
+		</div>
+	</div>
+	{{/config.variables.length}}
+	
+	{{#config.functions.length}}
+	<div class="section functions">
+		<div class="header">
+			Functions
+		</div>
+		<div class="list">
+			{{#config.functions}}
+			<div class="item data-in" data-name="{{.}}">
+				{{.}}
+			</div>
+			{{/config.functions}}
+		</div>
+	</div>
+	{{/config.functions.length}}
+	
+	{{#actionList.length}}
+	<div class="section actions">
+		<div class="header">
+			Actions
+		</div>
+		<div class="list">
+			{{#actionList}}
+			<div class="item data-out" data-name="{{.}}">
+				{{.}}
+			</div>
+			{{/actionList}}
+		</div>
+	</div>
+	{{/actionList.length}}
+	{{/isEntity}}
+
+	{{#inputList.length}}
+	<div class="section inputs">
+		<div class="header">
+			Inputs
+		</div>
+		<div class="list">
+			{{#inputList}}
+			<div class="item data-in" data-name="{{.}}">
+				{{.}}
+			</div>
+			{{/inputList}}
+		</div>
+	</div>
+	{{/inputList.length}}
+	
+	{{#outputList.length}}
+	<div class="section outputs">
+		<div class="header">
+			Outputs
+		</div>
+		<div class="list">
+			{{#outputList}}
+			<div class="item data-out" data-name="{{.}}">
+				{{.}}
+			</div>
+			{{/outputList}}
+		</div>
+	</div>
+	{{/outputList.length}}
+	
+	{{#isCondition}}
+	<div class="section condition">
+		<div class="header">
+			Condition
+		</div>
+		<div class="list">
+				<div class="item data-out">
+					Value
+				</div>
+		</div>
+	</div>
+	{{/isCondition}}
+	
+	{{#isTrigger}}
+	<div class="section trigger">
+		<div class="header">
+			Trigger
+		</div>
+		<div class="list">
+			<div class="item data-in">
+				Activate
+			</div>
+			<div class="item data-out">
+				Call
+			</div>
+		</div>
+	</div>
+	{{/isTrigger}}
+	
+	{{#isHandler}}
+	<div class="section handler">
+		<div class="header">
+			Handler
+		</div>
+		<div class="list">
+				<div class="item data-in">
+					Graph
+				</div>
+		</div>
+	</div>
+	{{/isHandler}}	
+</div>

@@ -1,0 +1,30 @@
+<form data-target="{{node.name}}" data-type="entity">
+<div class="form-group">
+<label>Node name</label>
+<input class="form-control" id="graphNodeName" placeholder="e.g. door" value="{{node.name}}">
+</div>
+
+<div class="form-group">
+<label>Variables</label>
+<input class="form-control taggable" id="nodeVariables" placeholder="e.g. state, position" value="{{node.config.variables}}">
+</div>
+
+{{#isHandler}}
+<div class="form-group">
+<label>Functions</label>
+<input class="form-control taggable" id="nodeFunctions" placeholder="e.g. move, open" value="{{node.config.functions}}">
+</div>
+{{/isHandler}}
+
+{{#isNetwork}}
+<div class="form-group">
+<label>Actions</label>
+<input class="form-control taggable" id="nodeActions" placeholder="e.g. use" value="{{actionKeys}}">
+</div>
+{{/isNetwork}}
+
+<div class="form-group">
+<label>Outputs</label>
+<input class="form-control taggable" id="nodeOutputs" placeholder="e.g. $position, ~$state" value="{{outputKeys}}">
+</div>
+</form>
