@@ -1,6 +1,8 @@
 Conductor
 =========
 
+![](screenshot.png)
+
 Conductor is a system for dynamic, portable interaction design.
 
 Setup
